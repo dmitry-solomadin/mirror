@@ -6,12 +6,12 @@ development:
   username:
   password:
 
-development:
+production:
   adapter: postgresql
   encoding: unicode
   database: mirror
   pool: 5
-  username:
+  username: postgres
   password:
 
 test:
