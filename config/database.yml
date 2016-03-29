@@ -10,7 +10,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: mirror
-  host: localhost
+  host: 127.0.0.1
   pool: 5
   username: postgres
   password:
