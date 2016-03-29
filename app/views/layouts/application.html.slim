@@ -1,0 +1,8 @@
+.container
+  - flash.each do |key, value|
+    div.alert class="alert-#{key}"
+      = value
+
+.container
+  h1 Header
+  = yield
