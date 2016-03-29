@@ -11,6 +11,7 @@ gem 'puma'
 gem 'devise', '3.4.1'
 gem 'bootstrap-sass'
 gem 'slim-rails'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug'
