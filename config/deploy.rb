@@ -1,7 +1,9 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-server '104.236.68.5', port: your_port_num, roles: [:web, :app, :db], primary: true
+server "104.236.68.5", user: "root", roles: %w{web app db}
+
+set :ssh_options, {:forward_agent => true}
 
 set :application, 'mirror'
 set :deploy_user, 'root'
