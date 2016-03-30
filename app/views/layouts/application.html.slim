@@ -1,8 +1,18 @@
-.container
-  - flash.each do |key, value|
-    div.alert class="alert-#{key}"
-      = value
+doctype XML
+doctype Strict
+html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  head
+    title
+      | Project: Mirror
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  body.navbar-fixed.breadcrumbs-fixed class=(yield :body_class)
+    = render 'shared/header'
 
-.container
-  h1 Header
-  = yield
+    .container
+      - flash.each do |key, value|
+        div.alert class="alert-#{key}"
+          = value
+
+      = yield
