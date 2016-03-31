@@ -5,7 +5,7 @@ nav.navbar.navbar-default
     ul.nav.navbar-nav
       - if user_signed_in?
         li
-          = link_to 'Dashboard', dashboard_index_path
+          = link_to 'Dashboard', dashboard_path(current_user.dashboard)
     ul.nav.navbar-nav.pull-right
       - if user_signed_in?
         li.dropdown
