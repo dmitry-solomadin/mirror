@@ -6,11 +6,12 @@ window.Dashboard = ->
     dashboard.initDragging()
 
   initDragging: ->
+    @drake.destroy() if @drake
     elements = []
     $('.container-row').each ->
       elements.push @
 
-    dragula(elements, {
+    @drake = dragula(elements, {
 
     });
 
