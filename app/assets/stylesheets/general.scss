@@ -2,6 +2,10 @@
   padding-left: 0 !important;
 }
 
+.pr0 {
+  padding-right: 0 !important;
+}
+
 // DASHBOARD PAGE
 
 .last-row {
@@ -14,7 +18,7 @@
   margin-bottom: 10px;
   border: 1px solid #e1e1e1;
   text-align: center;
-  padding: 20px 0;
+  padding: 20px;
   
   .btn {
     margin: 60px 0;
@@ -31,7 +35,59 @@
   box-sizing: border-box;
   text-align: center;
   vertical-align: middle;
-  padding: 65px 0;
+  position: relative;
+
+  .widget-content {
+    padding: 65px 0;
+  }
+
+  .left-handle {
+    float: left;
+    left: 0;
+  }
+
+  .right-handle {
+    float: right;
+    right: 0;
+  }
+
+  .left-handle, .right-handle {
+    background: black;
+    width: 60px;
+    padding: 58px 0;
+    font-size: 28px;
+    height: 160px;
+    position: absolute;
+    color: white;
+    opacity: 0.0;
+    top: 0;
+    cursor: pointer;
+    transition: opacity 0.25s ease-out;
+  }
+
+  + .widget {
+    margin-top: 20px;
+  }
+
+  + .container-block {
+    margin-top: 20px;
+  }
+
+  &:hover {
+    .left-handle, .right-handle {
+      opacity: 0.5;
+      visibility: visible;
+    }
+  }
+}
+
+.container-block {
+  height: 160px;
+  padding: 0 !important;
+}
+
+.container-block + .widget {
+  margin-top: 20px;
 }
 
 .sample-widget {
