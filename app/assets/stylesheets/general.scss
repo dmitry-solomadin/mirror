@@ -81,9 +81,48 @@
   }
 }
 
+.sidepanel-widget {
+  &:hover {
+    .left-handle, .right-handle {
+      display: none;
+    }
+  }
+}
+
+.side-btn {
+  position: relative;
+  top: 100px;
+  transform: rotate(90deg);
+  left: -31px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 0 !important;
+}
+
+.side-panel-wrapper {
+  #position: relative;
+}
+
+.side-panel {
+  padding: 20px;
+  width: 300px;
+  left: -300px;
+  height: 100%;
+  position: absolute;
+  top: 51px;
+  z-index: 999;
+  background: white;
+  opacity: 0.8;
+  border: 1px solid #e1e1e1;
+}
+
 .container-block {
   height: 160px;
   padding: 0 !important;
+
+  + .container-block {
+    padding-right: 10px;
+  }
 }
 
 .container-block + .widget {

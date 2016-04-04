@@ -10,6 +10,8 @@ html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"
   body.navbar-fixed.breadcrumbs-fixed class=(yield :body_class)
     = render 'shared/header'
 
+    = yield :side
+
     .container
       - flash.each do |key, value|
         div.alert class="#{key == "notice" ? "alert-info" : "alert-danger"}"

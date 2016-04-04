@@ -2,6 +2,7 @@ window.Dashboard = ->
 
   init: ->
     $(".js-add-row-button").on 'click', -> dashboard.addRow()
+    dashboard.initSidepanel()
     dashboard.initWidgets()
     dashboard.initDragging()
 
@@ -15,6 +16,15 @@ window.Dashboard = ->
     $(document).on 'click', ".js-add-widget-button", -> dashboard.addWidget(@)
     $(document).on 'click', ".js-left-widget-handle", -> dashboard.moveWidgetLeft(@)
     $(document).on 'click', ".js-right-widget-handle", -> dashboard.moveWidgetRight(@)
+
+  initSidepanel: ->
+    $('.js-side-btn').on 'click', ->
+      if $('.js-side-panel').css("left") == "-300px"
+        $('.js-side-panel').css("left": "0")
+        $('.js-side-btn').css("left": "269px")
+      else
+        $('.js-side-panel').css("left": "-300px")
+        $('.js-side-btn').css("left": "-31px")
 
   moveWidget: (handle, direction) ->
     widget = $(handle).parents('.widget:first')

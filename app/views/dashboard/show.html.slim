@@ -1,3 +1,9 @@
+- content_for :side
+  .side-panel-wrapper
+    .side-panel.js-side-panel
+      = render 'widget', widget_class: "sidepanel-widget"
+  a.btn.btn-default.side-btn.js-side-btn Widgets
+
 .containers
   .row.container-row
     a.btn.btn-success.js-add-widget-button +
@@ -7,7 +13,4 @@
 .row.container-row.sample-row
   a.btn.btn-success.js-add-widget-button +
 
-.widget.col-md-12.pl0.pr0.sample-widget
-  .left-handle.js-left-widget-handle &larr;
-  .widget-content Widget
-  .right-handle.js-right-widget-handle &rarr;
+= render 'widget', widget_class: "sample-widget"
