@@ -4,11 +4,15 @@
       = render 'widget', widget_class: "sidepanel-widget"
   a.btn.btn-default.side-btn.js-side-btn Widgets
 
+.row.mb20
+  a.btn.btn-success Preview
+
 .containers
-  .row.container-row
-    a.btn.btn-success.js-add-widget-button +
+  - @dashboard.widgets.each do |widget|
+    .row.container-row
+      a.btn.btn-success.js-add-widget-button +
   .row.last-row
-    a.btn.btn-default.js-add-row-button Add Row
+    a.btn.btn-default.js-add-row-button href="#{add_widget_dashboard_path(@dashboard)}" Add Row
 
 .row.container-row.sample-row
   a.btn.btn-success.js-add-widget-button +

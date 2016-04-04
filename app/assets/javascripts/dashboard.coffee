@@ -1,7 +1,6 @@
 window.Dashboard = ->
 
   init: ->
-    $(".js-add-row-button").on 'click', -> dashboard.addRow()
     dashboard.initSidepanel()
     dashboard.initWidgets()
     dashboard.initDragging()
@@ -13,6 +12,8 @@ window.Dashboard = ->
     @drake = dragula elements
 
   initWidgets: ->
+    $(".js-add-row-button").on 'click', (e) -> dashboard.addRow(@, e)
+
     $(document).on 'click', ".js-add-widget-button", -> dashboard.addWidget(@)
     $(document).on 'click', ".js-left-widget-handle", -> dashboard.moveWidgetLeft(@)
     $(document).on 'click', ".js-right-widget-handle", -> dashboard.moveWidgetRight(@)
@@ -25,6 +26,20 @@ window.Dashboard = ->
       else
         $('.js-side-panel').css("left": "-300px")
         $('.js-side-btn').css("left": "-31px")
+
+  addRow: (btn, e) ->
+    e.preventDefault()
+    $.ajax
+      method: "POST",
+      url: $(btn).attr('href')
+      data:
+        widget_type: 'ROW',
+        position: dashboard.maxRowPosition() + 1
+      success: ->
+        $('.containers .last-row').before($('.sample-row').clone().removeClass('sample-row'))
+        dashboard.initDragging()
+
+  maxRowPosition: -> $(".container-row:not(.sample-row)").size()
 
   moveWidget: (handle, direction) ->
     widget = $(handle).parents('.widget:first')
@@ -57,10 +72,6 @@ window.Dashboard = ->
   moveWidgetRight: (handle) -> dashboard.moveWidget(handle, 'right')
 
   moveWidgetLeft: (handle) -> dashboard.moveWidget(handle, 'left')
-
-  addRow: ->
-    $('.containers .last-row').before($('.sample-row').clone().removeClass('sample-row'))
-    dashboard.initDragging()
 
   addWidget: (btn) ->
     container = $(btn).parents('.container-row:first')
