@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   resources :dashboard, only: [:show] do
-    member do
-      post :add_widget
-    end
+    resources :widgets, only: [:create, :update, :destroy]
   end
 
 end

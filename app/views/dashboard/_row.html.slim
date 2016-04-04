@@ -1,0 +1,4 @@
+- row_class = local_assigns.fetch(:row_class) { '' }
+.row.container-row class="#{row_class}"
+  a.btn.btn-danger.destroy-widget-button.js-destroy-row-button href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" x
+  a.btn.btn-success.add-widget-button.js-add-widget-button +

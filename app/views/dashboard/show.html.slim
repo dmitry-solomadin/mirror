@@ -9,12 +9,9 @@
 
 .containers
   - @dashboard.widgets.each do |widget|
-    .row.container-row
-      a.btn.btn-success.js-add-widget-button +
+    = render 'row', widget: widget
   .row.last-row
-    a.btn.btn-default.js-add-row-button href="#{add_widget_dashboard_path(@dashboard)}" Add Row
+    a.btn.btn-default.js-add-row-button href="#{dashboard_widgets_path(@dashboard)}" Add Row
 
-.row.container-row.sample-row
-  a.btn.btn-success.js-add-widget-button +
-
+= render 'row', widget: Widget.new, row_class: "sample-row"
 = render 'widget', widget_class: "sample-widget"

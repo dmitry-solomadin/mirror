@@ -12,8 +12,11 @@ window.Dashboard = ->
     @drake = dragula elements
 
   initWidgets: ->
+    # init rows
     $(".js-add-row-button").on 'click', (e) -> dashboard.addRow(@, e)
+    $(".js-destroy-row-button").on 'click', (e) -> dashboard.destroyWidget(@, e)
 
+    # init widgets
     $(document).on 'click', ".js-add-widget-button", -> dashboard.addWidget(@)
     $(document).on 'click', ".js-left-widget-handle", -> dashboard.moveWidgetLeft(@)
     $(document).on 'click', ".js-right-widget-handle", -> dashboard.moveWidgetRight(@)
@@ -33,11 +36,20 @@ window.Dashboard = ->
       method: "POST",
       url: $(btn).attr('href')
       data:
-        widget_type: 'ROW',
-        position: dashboard.maxRowPosition() + 1
+        widget:
+          widget_type: 'ROW',
+          position: dashboard.maxRowPosition() + 1
       success: ->
         $('.containers .last-row').before($('.sample-row').clone().removeClass('sample-row'))
         dashboard.initDragging()
+
+  destroyWidget: (btn, e) ->
+    e.preventDefault()
+    $.ajax
+      method: "DELETE",
+      url: $(btn).attr('href')
+      success: ->
+        $(btn).parents(".container-row:first").remove()
 
   maxRowPosition: -> $(".container-row:not(.sample-row)").size()
 

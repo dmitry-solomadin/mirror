@@ -27,9 +27,31 @@
   border: 1px solid #e1e1e1;
   text-align: center;
   padding: 20px;
+  position: relative;
   
-  .btn {
+  .add-widget-button {
     margin: 60px 0;
+  }
+
+  .destroy-widget-button {
+    transition: opacity 0.25s ease-out;
+    opacity: 0.0;
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 3px 8px;
+  }
+
+  &:hover {
+    .destroy-widget-button {
+      opacity: 0.5;
+      visibility: visible;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
 
