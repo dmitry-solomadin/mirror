@@ -8,8 +8,13 @@ window.Dashboard = ->
   initDragging: ->
     @drake.destroy() if @drake
     elements = []
-    $('.container-row, .container-block').each -> elements.push @
-    @drake = dragula elements
+    $('.container-row, .container-block, .js-side-panel').each -> elements.push @
+    @drake = dragula elements,
+      copy: (el, source) -> $(el).hasClass('sidepanel-widget')
+
+    @drake.on 'drop', (el, target, source, sibling) ->
+      if $(el).hasClass('sidepanel-widget')
+        $(el).removeClass('sidepanel-widget')
 
   initWidgets: ->
     # init rows

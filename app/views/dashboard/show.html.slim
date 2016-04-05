@@ -1,7 +1,7 @@
 - content_for :side
   .side-panel-wrapper
     .side-panel.js-side-panel
-      = render 'widget', widget: Widget.new,  widget_class: "sidepanel-widget"
+      = render 'widget', widget: Widget.new(widget_type: 'WEATHER'),  widget_class: "sidepanel-widget"
   a.btn.btn-default.side-btn.js-side-btn Widgets
 
 .row.mb20
