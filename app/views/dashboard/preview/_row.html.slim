@@ -1,0 +1,3 @@
+div class="#{widget.top? ? 'row container container-row' : 'container container-block col-md-6'}"
+  - widget.children.by_position.each do |child_widget|
+    = render 'dashboard/preview/element', widget: child_widget

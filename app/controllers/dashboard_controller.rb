@@ -6,4 +6,9 @@ class DashboardController < ApplicationController
     @dashboard = Dashboard.find(params[:id])
   end
 
+  def preview
+    @dashboard = Dashboard.find(params[:id])
+    render 'preview', layout: 'preview'
+  end
+
 end

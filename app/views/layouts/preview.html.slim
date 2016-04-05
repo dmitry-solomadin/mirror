@@ -1,0 +1,12 @@
+doctype XML
+doctype Strict
+html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  head
+    title
+      | Project: Mirror
+    = stylesheet_link_tag 'preview', media: 'all'
+    = javascript_include_tag 'preview'
+    = csrf_meta_tags
+  body.navbar-fixed.breadcrumbs-fixed class=(yield :body_class)
+    .container
+      = yield
