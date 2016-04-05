@@ -1,4 +1,3 @@
-
 *.rbc
 .rspec
 /log
@@ -8,6 +7,7 @@
 /spec/tmp
 **.orig
 .idea/
+.byebug_history
 
 ## Environment normalization:
 /.bundle

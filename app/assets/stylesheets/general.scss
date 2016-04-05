@@ -120,6 +120,7 @@
 }
 
 .side-btn {
+  z-index: 99;
   position: absolute;
   top: 200px;
   transform: rotate(90deg);
@@ -160,10 +161,6 @@
 }
 
 .sample-widget {
-  display: none;
-}
-
-.sample-row {
   display: none;
 }
 

@@ -17,7 +17,7 @@ window.Dashboard = ->
     $(".js-destroy-row-button").on 'click', (e) -> dashboard.destroyWidget(@, e)
 
     # init widgets
-    $(document).on 'click', ".js-add-widget-button", -> dashboard.addWidget(@)
+    $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.addWidget(@, e)
     $(document).on 'click', ".js-left-widget-handle", -> dashboard.moveWidgetLeft(@)
     $(document).on 'click', ".js-right-widget-handle", -> dashboard.moveWidgetRight(@)
 
@@ -39,8 +39,8 @@ window.Dashboard = ->
         widget:
           widget_type: 'ROW',
           position: dashboard.maxRowPosition() + 1
-      success: ->
-        $('.containers .last-row').before($('.sample-row').clone().removeClass('sample-row'))
+      success: (data) ->
+        $('.containers .last-row').before(data)
         dashboard.initDragging()
 
   destroyWidget: (btn, e) ->
@@ -50,8 +50,6 @@ window.Dashboard = ->
       url: $(btn).attr('href')
       success: ->
         $(btn).parents(".container-row:first").remove()
-
-  maxRowPosition: -> $(".container-row:not(.sample-row)").size()
 
   moveWidget: (handle, direction) ->
     widget = $(handle).parents('.widget:first')
@@ -85,10 +83,24 @@ window.Dashboard = ->
 
   moveWidgetLeft: (handle) -> dashboard.moveWidget(handle, 'left')
 
-  addWidget: (btn) ->
-    container = $(btn).parents('.container-row:first')
-    container.prepend($('.sample-widget').clone().removeClass('sample-widget'))
-    container.find(".js-add-widget-button").remove()
+  addWidget: (btn, e) ->
+    e.preventDefault()
+    row = $(btn).parents('.container-row:first')
+    $.ajax
+      method: "POST",
+      url: $(btn).attr('href')
+      data:
+        widget:
+          widget_type: 'WEATHER',
+          parent_id: row.data('row-id'),
+          position: dashboard.maxWidgetPositionInRow(row) + 1
+      success: ->
+        row.prepend($('.sample-widget').clone().removeClass('sample-widget'))
+        row.find(".js-add-widget-button").remove()
+
+  maxRowPosition: -> $(".container-row").size()
+
+  maxWidgetPositionInRow: (row) -> row.find(".widget").size()
 
 $(document).on 'ready page:load', ->
   window.dashboard = Dashboard()

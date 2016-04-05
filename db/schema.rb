@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160404184112) do
 
   create_table "widgets", force: :cascade do |t|
     t.integer  "dashboard_id"
+    t.integer  "parent_id"
     t.string   "widget_type"
     t.integer  "position"
     t.datetime "created_at",   null: false

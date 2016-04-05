@@ -2,12 +2,16 @@ class WidgetsController < ApplicationController
 
   before_action :authenticate!
 
-  # TODO: should actually return template
   def create
-    dashboard = Dashboard.find(params[:dashboard_id])
-    dashboard.widgets <<
-      Widget.create!(widget_type: widget_params[:widget_type], position: widget_params[:position])
-    head :ok, content_type: 'text/html'
+    widget = Widget.create!(widget_params)
+    if widget.parent.present?
+      widget.parent.children << widget
+      head :ok, content_type: 'text/html'
+    else
+      @dashboard = Dashboard.find(params[:dashboard_id])
+      @dashboard.widgets << widget
+      render partial: 'dashboard/row', locals: { widget: widget }
+    end
   end
 
   def destroy
@@ -18,7 +22,7 @@ class WidgetsController < ApplicationController
 private
 
   def widget_params
-    params.require(:widget).permit(:widget_type, :position)
+    params.require(:widget).permit(:widget_type, :position, :parent_id)
   end
 
 end
