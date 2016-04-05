@@ -1,6 +1,6 @@
 - row_class = local_assigns.fetch(:row_class) { '' }
 div class="#{row_class} #{widget.top? ? 'row container-row' : 'container-block col-md-6'}" data-row-id="#{widget.id}"
-  - widget.children.each do |child_widget|
+  - widget.children.by_position.each do |child_widget|
     = render 'element', widget: child_widget
   a.btn.btn-danger.destroy-widget-button.js-destroy-row-button href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" x
   - if widget.top?

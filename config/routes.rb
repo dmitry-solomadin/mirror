@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   resources :dashboard, only: [:show] do
-    resources :widgets, only: [:create, :update, :destroy]
+    resources :widgets, only: [:create, :destroy] do
+      member do
+        post 'wrap'
+        post 'unwrap'
+      end
+    end
   end
 
 end

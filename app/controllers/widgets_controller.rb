@@ -14,21 +14,32 @@ class WidgetsController < ApplicationController
     end
   end
 
-  def update
+  def wrap
     widget = Widget.find(params[:id])
     current_parent = widget.parent
     current_parent.children.delete(widget)
-    new_row_1 = Widget.create!(widget_type: "ROW", position: widget_update_params[:current_position],
-                               parent_id: current_parent.id)
-    new_row_2 = Widget.create!(widget_type: "ROW", position: widget_update_params[:current_position],
-                               parent_id: current_parent.id)
-    current_parent.children << new_row_1
-    current_parent.children << new_row_2
-    if widget_update_params[:move_direction] == 'left'
-      new_row_1.children << widget
+    new_row_right = current_parent.insert_new_row(widget_wrap_params[:current_position])
+    new_row_left = current_parent.insert_new_row(widget_wrap_params[:current_position])
+    if widget_wrap_params[:move_direction] == 'left'
+      new_row_left.children << widget
     else
-      new_row_2.children << widget
+      new_row_right.children << widget
     end
+    head :ok, content_type: 'text/html'
+  end
+
+  def unwrap
+    widget = Widget.find(params[:id])
+    current_parent = widget.parent
+    new_parent = current_parent.parent
+    if widget_wrap_params[:move_direction] == 'left'
+      new_parent.children.where(position: current_parent.position - 1).first.destroy!
+    else
+      new_parent.children.where(position: current_parent.position + 1).first.destroy!
+    end
+    widget.update(parent: new_parent)
+    current_parent.destroy!
+
     head :ok, content_type: 'text/html'
   end
 
@@ -43,7 +54,7 @@ private
     params.require(:widget).permit(:widget_type, :position, :parent_id)
   end
 
-  def widget_update_params
+  def widget_wrap_params
     params.require(:widget).permit(:move_direction, :current_position)
   end
 

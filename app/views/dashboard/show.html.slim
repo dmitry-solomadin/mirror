@@ -8,7 +8,7 @@
   a.btn.btn-success Preview
 
 .containers
-  - @dashboard.widgets.each do |widget|
+  - @dashboard.widgets.by_position.each do |widget|
     = render 'element', widget: widget
   .row.last-row
     a.btn.btn-default.js-add-row-button href="#{dashboard_widgets_path(@dashboard)}" Add Row

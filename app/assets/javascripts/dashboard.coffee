@@ -18,8 +18,7 @@ window.Dashboard = ->
 
     # init widgets
     $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.addWidget(@, e)
-    $(document).on 'click', ".js-left-widget-handle", (e) -> dashboard.moveWidgetLeft(@, e)
-    $(document).on 'click', ".js-right-widget-handle", (e) -> dashboard.moveWidgetRight(@, e)
+    $(document).on 'click', ".js-left-widget-handle, .js-right-widget-handle", (e) -> dashboard.moveWidget(@, e)
 
   initSidepanel: ->
     $('.js-side-btn').on 'click', ->
@@ -51,9 +50,10 @@ window.Dashboard = ->
       success: ->
         $(btn).parents(".container-row:first").remove()
 
-  moveWidget: (handle, e, direction) ->
+  moveWidget: (handle, e) ->
     e.preventDefault()
     widget = $(handle).parents('.widget:first')
+    direction = if $(handle).hasClass("js-left-widget-handle") then "left" else "right"
     row = widget.parent()
 
     if row.hasClass('container-block')
@@ -62,20 +62,36 @@ window.Dashboard = ->
 
       # remove container
       if direction == 'left' and parentPrev.hasClass('container-block') and parentPrev.offset().top == row.offset().top
-        parentPrev.remove()
-        widget.unwrap()
-        dashboard.initDragging()
+        dashboard.unwrap(handle, widget, parentPrev)
         return
       else if direction == 'right' and parentNext.hasClass('container-block') and parentNext.offset().top == row.offset().top
-        parentNext.remove()
-        widget.unwrap()
-        dashboard.initDragging()
+        dashboard.unwrap(handle, widget, parentNext)
         return
 
     # add container
+    dashboard.wrap(handle, widget)
+
+  unwrap: (handle, widget, prevOrNextRow) ->
+    row = widget.parent()
+    direction = if $(handle).hasClass("js-left-widget-handle") then "left" else "right"
     $.ajax
-      method: "PATCH",
-      url: $(handle).attr('href')
+      method: "POST",
+      url: "#{$(handle).attr('href')}/unwrap"
+      data:
+        widget:
+          move_direction: direction
+          current_position: dashboard.maxWidgetPositionInRow(row) # TODO: should be current row position
+      success: (data) ->
+        prevOrNextRow.remove()
+        widget.unwrap()
+        dashboard.initDragging()
+
+  wrap: (handle, widget) ->
+    row = widget.parent()
+    direction = if $(handle).hasClass("js-left-widget-handle") then "left" else "right"
+    $.ajax
+      method: "POST",
+      url: "#{$(handle).attr('href')}/wrap"
       data:
         widget:
           move_direction: direction
@@ -87,10 +103,6 @@ window.Dashboard = ->
           widget.after('<div class="container-block col-md-6"></div>')
         widget.wrap('<div class="container-block col-md-6"></div>')
         dashboard.initDragging()
-
-  moveWidgetRight: (handle, e) -> dashboard.moveWidget(handle, e, 'right')
-
-  moveWidgetLeft: (handle, e) -> dashboard.moveWidget(handle, e, 'left')
 
   addWidget: (btn, e) ->
     e.preventDefault()
