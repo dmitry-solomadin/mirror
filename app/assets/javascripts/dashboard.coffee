@@ -8,13 +8,36 @@ window.Dashboard = ->
   initDragging: ->
     @drake.destroy() if @drake
     elements = []
-    $('.container-row, .container-block, .js-side-panel').each -> elements.push @
+    $('.container, .js-side-panel').each -> elements.push @
     @drake = dragula elements,
       copy: (el, source) -> $(el).hasClass('sidepanel-widget')
 
     @drake.on 'drop', (el, target, source, sibling) ->
       if $(el).hasClass('sidepanel-widget')
         $(el).removeClass('sidepanel-widget')
+        row = $(el).parent()
+        $.ajax
+          method: "POST",
+          url: $(el).data('href')
+          data:
+            widget:
+              widget_type: 'WEATHER',
+              parent_id: row.data('row-id'),
+              position: dashboard.widgetCount(row) + 1
+          success: (data) ->
+            $('.containers .last-row').before(data)
+            dashboard.initDragging()
+      else
+        $.ajax
+          method: "PATCH",
+          url: $(el).data('href')
+          data:
+            widget:
+              position: dashboard.widgetPositionInRow(el)
+              parent_id: $(el).parents(".container:first").data('row-id')
+          success: (data) ->
+            $('.containers .last-row').before(data)
+            dashboard.initDragging()
 
   initWidgets: ->
     # init rows
@@ -42,7 +65,7 @@ window.Dashboard = ->
       data:
         widget:
           widget_type: 'ROW',
-          position: dashboard.maxRowPosition() + 1
+          position: dashboard.rowCount() + 1
       success: (data) ->
         $('.containers .last-row').before(data)
         dashboard.initDragging()
@@ -53,7 +76,7 @@ window.Dashboard = ->
       method: "DELETE",
       url: $(btn).attr('href')
       success: ->
-        $(btn).parents(".container-row:first").remove()
+        $(btn).parents(".container:first").remove()
 
   moveWidget: (handle, e) ->
     e.preventDefault()
@@ -77,7 +100,6 @@ window.Dashboard = ->
     dashboard.wrap(handle, widget)
 
   unwrap: (handle, widget, prevOrNextRow) ->
-    row = widget.parent()
     direction = if $(handle).hasClass("js-left-widget-handle") then "left" else "right"
     $.ajax
       method: "POST",
@@ -85,14 +107,13 @@ window.Dashboard = ->
       data:
         widget:
           move_direction: direction
-          current_position: dashboard.maxWidgetPositionInRow(row) # TODO: should be current row position
+          current_position: dashboard.widgetPositionInRow(widget) # TODO: should be current row position
       success: (data) ->
         prevOrNextRow.remove()
         widget.unwrap()
         dashboard.initDragging()
 
   wrap: (handle, widget) ->
-    row = widget.parent()
     direction = if $(handle).hasClass("js-left-widget-handle") then "left" else "right"
     $.ajax
       method: "POST",
@@ -100,7 +121,7 @@ window.Dashboard = ->
       data:
         widget:
           move_direction: direction
-          current_position: dashboard.maxWidgetPositionInRow(row)
+          current_position: dashboard.widgetPositionInRow(widget)
       success: (data) ->
         if direction == 'right'
           widget.before('<div class="container-block col-md-6"></div>')
@@ -111,7 +132,7 @@ window.Dashboard = ->
 
   addWidget: (btn, e) ->
     e.preventDefault()
-    row = $(btn).parents('.container-row:first')
+    row = $(btn).parents('.container:first')
     $.ajax
       method: "POST",
       url: $(btn).attr('href')
@@ -119,14 +140,16 @@ window.Dashboard = ->
         widget:
           widget_type: 'WEATHER',
           parent_id: row.data('row-id'),
-          position: dashboard.maxWidgetPositionInRow(row) + 1
+          position: dashboard.widgetCount(row) + 1
       success: (data) ->
         row.prepend(data)
-        row.find(".js-add-widget-button").remove()
+        #row.find(".js-add-widget-button").remove()
 
-  maxRowPosition: -> $(".container-row").size()
+  rowCount: -> $(".container-row").size()
 
-  maxWidgetPositionInRow: (row) -> row.find(".widget").size()
+  widgetCount: (row) -> row.find(".widget").size()
+
+  widgetPositionInRow: (widget) -> $(widget).index(".widget")
 
 $(document).on 'ready page:load', ->
   window.dashboard = Dashboard()

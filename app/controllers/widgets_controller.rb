@@ -14,6 +14,11 @@ class WidgetsController < ApplicationController
     end
   end
 
+  def update
+    Widget.find(params[:id]).update(widget_params)
+    head :ok, content_type: 'text/html'
+  end
+
   def wrap
     widget = Widget.find(params[:id])
     current_parent = widget.parent
