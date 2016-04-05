@@ -1,7 +1,7 @@
 - content_for :side
   .side-panel-wrapper
     .side-panel.js-side-panel
-      = render 'widget', widget_class: "sidepanel-widget"
+      = render 'widget', widget: Widget.new,  widget_class: "sidepanel-widget"
   a.btn.btn-default.side-btn.js-side-btn Widgets
 
 .row.mb20
@@ -12,5 +12,3 @@
     = render 'element', widget: widget
   .row.last-row
     a.btn.btn-default.js-add-row-button href="#{dashboard_widgets_path(@dashboard)}" Add Row
-
-= render 'widget', widget_class: "sample-widget"

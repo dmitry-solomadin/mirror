@@ -92,6 +92,7 @@
     opacity: 0.0;
     top: 0;
     cursor: pointer;
+    text-decoration: none;
     transition: opacity 0.25s ease-out;
   }
 
@@ -158,10 +159,6 @@
 
 .container-block + .widget {
   margin-top: 20px;
-}
-
-.sample-widget {
-  display: none;
 }
 
 // DRAGULA

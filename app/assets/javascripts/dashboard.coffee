@@ -18,8 +18,8 @@ window.Dashboard = ->
 
     # init widgets
     $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.addWidget(@, e)
-    $(document).on 'click', ".js-left-widget-handle", -> dashboard.moveWidgetLeft(@)
-    $(document).on 'click', ".js-right-widget-handle", -> dashboard.moveWidgetRight(@)
+    $(document).on 'click', ".js-left-widget-handle", (e) -> dashboard.moveWidgetLeft(@, e)
+    $(document).on 'click', ".js-right-widget-handle", (e) -> dashboard.moveWidgetRight(@, e)
 
   initSidepanel: ->
     $('.js-side-btn').on 'click', ->
@@ -51,37 +51,46 @@ window.Dashboard = ->
       success: ->
         $(btn).parents(".container-row:first").remove()
 
-  moveWidget: (handle, direction) ->
+  moveWidget: (handle, e, direction) ->
+    e.preventDefault()
     widget = $(handle).parents('.widget:first')
-    widgetParent = widget.parent()
+    row = widget.parent()
 
-    if widgetParent.hasClass('container-block')
-      parentPrev = widgetParent.prev()
-      parentNext = widgetParent.next()
+    if row.hasClass('container-block')
+      parentPrev = row.prev()
+      parentNext = row.next()
 
       # remove container
-      if direction == 'left' and parentPrev.hasClass('container-block') and parentPrev.offset().top == widgetParent.offset().top
+      if direction == 'left' and parentPrev.hasClass('container-block') and parentPrev.offset().top == row.offset().top
         parentPrev.remove()
         widget.unwrap()
         dashboard.initDragging()
         return
-      else if direction == 'right' and parentNext.hasClass('container-block') and parentNext.offset().top == widgetParent.offset().top
+      else if direction == 'right' and parentNext.hasClass('container-block') and parentNext.offset().top == row.offset().top
         parentNext.remove()
         widget.unwrap()
         dashboard.initDragging()
         return
 
     # add container
-    if direction == 'right'
-      widget.before('<div class="container-block col-md-6"></div>')
-    else
-      widget.after('<div class="container-block col-md-6"></div>')
-    widget.wrap('<div class="container-block col-md-6"></div>')
-    dashboard.initDragging()
+    $.ajax
+      method: "PATCH",
+      url: $(handle).attr('href')
+      data:
+        widget:
+          move_direction: direction
+          current_position: dashboard.maxWidgetPositionInRow(row)
+      success: (data) ->
+        if direction == 'right'
+          widget.before('<div class="container-block col-md-6"></div>')
+        else
+          widget.after('<div class="container-block col-md-6"></div>')
+        widget.wrap('<div class="container-block col-md-6"></div>')
+        dashboard.initDragging()
 
-  moveWidgetRight: (handle) -> dashboard.moveWidget(handle, 'right')
+  moveWidgetRight: (handle, e) -> dashboard.moveWidget(handle, e, 'right')
 
-  moveWidgetLeft: (handle) -> dashboard.moveWidget(handle, 'left')
+  moveWidgetLeft: (handle, e) -> dashboard.moveWidget(handle, e, 'left')
 
   addWidget: (btn, e) ->
     e.preventDefault()
@@ -94,8 +103,8 @@ window.Dashboard = ->
           widget_type: 'WEATHER',
           parent_id: row.data('row-id'),
           position: dashboard.maxWidgetPositionInRow(row) + 1
-      success: ->
-        row.prepend($('.sample-widget').clone().removeClass('sample-widget'))
+      success: (data) ->
+        row.prepend(data)
         row.find(".js-add-widget-button").remove()
 
   maxRowPosition: -> $(".container-row").size()

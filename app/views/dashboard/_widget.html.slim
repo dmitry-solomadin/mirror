@@ -1,5 +1,5 @@
 - widget_class = local_assigns.fetch(:widget_class) { '' }
 .widget.col-md-12.pl0.pr0 class="#{widget_class}"
-  .left-handle.js-left-widget-handle &larr;
-  .widget-content Widget
-  .right-handle.js-right-widget-handle &rarr;
+  a.left-handle.js-left-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &larr;
+  .widget-content = widget.widget_type
+  a.right-handle.js-right-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &rarr;

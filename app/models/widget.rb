@@ -5,4 +5,8 @@ class Widget < ActiveRecord::Base
 
   validates_presence_of :widget_type, :position
   validates_inclusion_of :widget_type, in: %w(ROW WEATHER)
+
+  def top?
+    parent_id.nil?
+  end
 end
