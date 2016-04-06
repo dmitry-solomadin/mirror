@@ -96,6 +96,21 @@
     transition: opacity 0.25s ease-out;
   }
 
+  .widget-btn {
+    position: absolute;
+    top: 10px;
+    opacity: 0.0;
+    transition: opacity 0.25s ease-out;
+  }
+
+  .widget-settings-btn {
+    right: 160px;
+  }
+
+  .widget-delete-btn {
+    right: 70px;
+  }
+
   + .widget {
     margin-top: 20px;
   }
@@ -107,6 +122,11 @@
   &:hover {
     .left-handle, .right-handle {
       opacity: 0.5;
+      visibility: visible;
+    }
+
+    .widget-btn {
+      opacity: 1;
       visibility: visible;
     }
   }

@@ -2,4 +2,6 @@
 .widget.col-md-12.pl0.pr0 class="#{widget_class}" data-href="#{widget.id ? dashboard_widget_path(@dashboard.id, widget.id) : dashboard_widgets_path(@dashboard)}"
   a.left-handle.js-left-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &larr;
   .widget-content = widget.widget_type
+  a.btn.btn-default.widget-settings-btn.widget-btn.js-widget-settings-btn href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" Settings
+  a.btn.btn-danger.widget-delete-btn.widget-btn.js-widget-delete-btn href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" Delete
   a.right-handle.js-right-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &rarr;

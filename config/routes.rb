@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       member do
         post 'wrap'
         post 'unwrap'
+        get 'show_settings'
       end
     end
   end

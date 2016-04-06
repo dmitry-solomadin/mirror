@@ -42,10 +42,11 @@ window.Dashboard = ->
   initWidgets: ->
     # init rows
     $(".js-add-row-button").on 'click', (e) -> dashboard.addRow(@, e)
-    $(".js-destroy-row-button").on 'click', (e) -> dashboard.destroyWidget(@, e)
+    $(".js-destroy-row-button").on 'click', (e) -> dashboard.destroyRow(@, e)
 
     # init widgets
     $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.addWidget(@, e)
+    $(document).on 'click', ".js-widget-delete-btn", (e) -> dashboard.destroyWidget(@, e)
     $(document).on 'click', ".js-left-widget-handle, .js-right-widget-handle", (e) -> dashboard.moveWidget(@, e)
 
   initSidepanel: ->
@@ -70,13 +71,21 @@ window.Dashboard = ->
         $('.containers .last-row').before(data)
         dashboard.initDragging()
 
-  destroyWidget: (btn, e) ->
+  destroyRow: (btn, e) ->
     e.preventDefault()
     $.ajax
       method: "DELETE",
       url: $(btn).attr('href')
       success: ->
         $(btn).parents(".container:first").remove()
+
+  destroyWidget: (btn, e) ->
+    e.preventDefault()
+    $.ajax
+      method: "DELETE",
+      url: $(btn).attr('href')
+      success: ->
+        $(btn).parents(".widget:first").remove()
 
   moveWidget: (handle, e) ->
     e.preventDefault()
