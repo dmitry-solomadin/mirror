@@ -1,0 +1,6 @@
+.modal-header #{@widget.widget_type.capitalize} widget settings
+.modal-body
+  - if @widget.widget_type == "WEATHER"
+    = render 'weather_settings'
+  - else
+    | No settings available.

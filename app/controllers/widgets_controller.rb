@@ -53,10 +53,26 @@ class WidgetsController < ApplicationController
     head :ok, content_type: 'text/html'
   end
 
+  def show_settings
+    @dashboard = Dashboard.find(params[:dashboard_id])
+    @widget = Widget.find(params[:id])
+    render 'settings', layout: false
+  end
+
+  def update_settings
+    widget = Widget.find(params[:id])
+    widget.update!(widget_settings_params)
+    head :ok, content_type: 'text/html'
+  end
+
 private
 
   def widget_params
     params.require(:widget).permit(:widget_type, :position, :parent_id)
+  end
+
+  def widget_settings_params
+    params.require(:widget).permit(:settings, :location)
   end
 
   def widget_wrap_params

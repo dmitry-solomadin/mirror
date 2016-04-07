@@ -6,6 +6,12 @@ class Widget < ActiveRecord::Base
   validates_presence_of :widget_type, :position
   validates_inclusion_of :widget_type, in: %w(ROW WEATHER)
 
+  after_initialize do |widget|
+    widget.settings = {} if widget.new_record?
+  end
+
+  store_accessor :settings, :location
+
   def self.by_position
     order(position: :asc)
   end

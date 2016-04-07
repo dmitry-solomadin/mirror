@@ -25,8 +25,7 @@ window.Dashboard = ->
               parent_id: row.data('row-id'),
               position: dashboard.widgetCount(row) + 1
           success: (data) ->
-            $('.containers .last-row').before(data)
-            dashboard.initDragging()
+            $(el).replaceWith(data)
       else
         $.ajax
           method: "PATCH",
@@ -46,6 +45,7 @@ window.Dashboard = ->
 
     # init widgets
     $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.addWidget(@, e)
+    $(document).on 'click', ".js-widget-settings-btn", (e) -> dashboard.showSettings(@, e)
     $(document).on 'click', ".js-widget-delete-btn", (e) -> dashboard.destroyWidget(@, e)
     $(document).on 'click', ".js-left-widget-handle, .js-right-widget-handle", (e) -> dashboard.moveWidget(@, e)
 
@@ -86,6 +86,29 @@ window.Dashboard = ->
       url: $(btn).attr('href')
       success: ->
         $(btn).parents(".widget:first").remove()
+
+  showSettings: (btn, e) ->
+    e.preventDefault()
+    $.ajax
+      method: "GET",
+      url: $(btn).attr('href')
+      success: (data) ->
+        parsedData = $($.parseHTML(data))
+        $('#modal').find(".modal-body").html(parsedData.filter('.modal-body').html())
+        $('#modal').find(".modal-header").html(parsedData.filter('.modal-header').html())
+        #$('#modal').find(".modal-body .js-save-settings").on 'click', (e) -> dashboard.saveSettings(@, e)
+        $('#modal').modal()
+
+  saveSettings: (btn, e) ->
+    e.preventDefault()
+    $.ajax
+      method: "GET",
+      url: $(btn).attr('href')
+      success: (data) ->
+        parsedData = $($.parseHTML(data))
+        $('#modal').find(".modal-body").html(parsedData.filter('.modal-body').html())
+        $('#modal').find(".modal-header").html(parsedData.filter('.modal-header').html())
+        $('#modal').modal()
 
   moveWidget: (handle, e) ->
     e.preventDefault()
