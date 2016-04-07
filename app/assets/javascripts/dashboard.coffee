@@ -21,7 +21,7 @@ window.Dashboard = ->
           url: $(el).data('href')
           data:
             widget:
-              widget_type: 'WEATHER',
+              widget_type: $(el).data('widget-type'),
               parent_id: row.data('row-id'),
               position: dashboard.widgetCount(row) + 1
           success: (data) ->
@@ -44,7 +44,8 @@ window.Dashboard = ->
     $(".js-destroy-row-button").on 'click', (e) -> dashboard.destroyRow(@, e)
 
     # init widgets
-    $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.addWidget(@, e)
+    $(document).on 'click', ".js-add-widget-button", (e) ->
+      dashboard.showAddWidget(@, e)
     $(document).on 'click', ".js-widget-settings-btn", (e) -> widgetSettings.showSettings(@, e)
     $(document).on 'click', ".js-widget-delete-btn", (e) -> dashboard.destroyWidget(@, e)
     $(document).on 'click', ".js-left-widget-handle, .js-right-widget-handle", (e) -> dashboard.moveWidget(@, e)
@@ -78,6 +79,35 @@ window.Dashboard = ->
       url: $(btn).attr('href')
       success: ->
         $(btn).parents(".widget-container:first").remove()
+
+  showAddWidget: (btn, e) ->
+    e.preventDefault()
+    $.ajax
+      method: "GET",
+      url: $(btn).attr('href')
+      success: (data) ->
+        parsedData = $($.parseHTML(data))
+        $('#modal').find(".modal-body").html(parsedData.filter('.modal-body').html())
+        $('#modal').find(".modal-header").html(parsedData.filter('.modal-header').html())
+        $('.js-add-widget-row').on 'click', (e, data, status, xhr) ->
+          dashboard.addWidget(@, e)
+          $('#modal').modal('hide')
+        $('#modal').modal()
+
+  addWidget: (btn, e) ->
+    e.preventDefault()
+    rowId = $(btn).data('row-id')
+    row = dashboard.rowById(rowId)
+    $.ajax
+      method: "POST",
+      url: $(btn).data('href')
+      data:
+        widget:
+          widget_type: $(btn).data('widget-type')
+          parent_id: rowId,
+          position: dashboard.widgetCount(row) + 1
+      success: (data) ->
+        row.prepend(data)
 
   destroyWidget: (btn, e) ->
     e.preventDefault()
@@ -139,19 +169,7 @@ window.Dashboard = ->
         widget.wrap('<div class="container-block col-md-6"></div>')
         dashboard.initDragging()
 
-  addWidget: (btn, e) ->
-    e.preventDefault()
-    row = $(btn).parents('.widget-container:first')
-    $.ajax
-      method: "POST",
-      url: $(btn).attr('href')
-      data:
-        widget:
-          widget_type: 'WEATHER',
-          parent_id: row.data('row-id'),
-          position: dashboard.widgetCount(row) + 1
-      success: (data) ->
-        row.prepend(data)
+  rowById: (rowId) -> $(".widget-container[data-row-id=#{rowId}]")
 
   rowCount: -> $(".container-row").size()
 

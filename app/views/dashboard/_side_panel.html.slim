@@ -1,0 +1,4 @@
+.side-panel-wrapper
+  .side-panel.js-side-panel
+    - Widget.widget_types.each do |widget_type|
+      = render 'widget', widget: Widget.new(widget_type: widget_type),  widget_class: "sidepanel-widget"

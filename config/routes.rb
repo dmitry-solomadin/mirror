@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:show] do
     member do
       get 'preview'
+      get 'show_add_widget/:row_id', to: 'dashboard#show_add_widget', as: 'show_add_widget'
     end
 
     resources :widgets, only: [:create, :update, :destroy] do

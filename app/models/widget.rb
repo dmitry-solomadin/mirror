@@ -1,10 +1,12 @@
 class Widget < ActiveRecord::Base
+  WIDGET_TYPES = %w(ROW WEATHER TIME_AND_DATE COUNTDOWN QUOTE)
+
   belongs_to :dashboard
   belongs_to :parent, foreign_key: :parent_id, class_name: :Widget
   has_many :children, foreign_key: :parent_id, class_name: :Widget
 
   validates_presence_of :widget_type, :position
-  validates_inclusion_of :widget_type, in: %w(ROW WEATHER)
+  validates_inclusion_of :widget_type, in: WIDGET_TYPES
 
   after_initialize do |widget|
     widget.settings = {} if widget.new_record?
@@ -14,6 +16,14 @@ class Widget < ActiveRecord::Base
 
   def self.by_position
     order(position: :desc)
+  end
+
+  def self.all_types
+    WIDGET_TYPES
+  end
+
+  def self.widget_types
+    WIDGET_TYPES.reject { |wt| wt == "ROW" }
   end
 
   def insert_new_row(position)

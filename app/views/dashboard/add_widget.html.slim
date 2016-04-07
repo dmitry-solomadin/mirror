@@ -1,0 +1,5 @@
+.modal-header Add new widget
+.modal-body
+  - Widget.widget_types.each do |widget_type|
+    div.add-widget-row.js-add-widget-row data-widget-type="#{widget_type}" data-row-id="#{@row.id}" data-href="#{dashboard_widgets_path(@dashboard)}"
+      = widget_type.capitalize.humanize

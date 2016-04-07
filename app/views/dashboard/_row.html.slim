@@ -5,4 +5,4 @@ div class="#{row_class} #{widget.top? ? 'row widget-container container-row' : '
   a.btn.btn-danger.destroy-widget-button.glyphicon.glyphicon-remove-circle.js-destroy-row-button href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}"
   - if widget.top?
     div.row style="clear: both;"
-      a.btn.btn-success.add-widget-button.js-add-widget-button href="#{dashboard_widgets_path(@dashboard)}" +
+      a.btn.btn-success.add-widget-button.js-add-widget-button href="#{show_add_widget_dashboard_path(@dashboard.id, widget.id)}" +

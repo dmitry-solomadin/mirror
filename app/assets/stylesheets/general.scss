@@ -22,6 +22,10 @@
   margin-bottom: 15px;
 }
 
+.modal-header {
+  margin-bottom: 0;
+}
+
 // DASHBOARD PAGE
 
 .last-row {
@@ -74,6 +78,7 @@
   text-align: center;
   vertical-align: middle;
   position: relative;
+  cursor: pointer;
 
   .widget-content {
     padding: 65px 0;
@@ -141,8 +146,14 @@
 }
 
 .sidepanel-widget {
+  height: 85px;
+
+  .widget-content {
+    padding: 30px 0;
+  }
+
   &:hover {
-    .left-handle, .right-handle {
+    .left-handle, .right-handle, .widget-btn {
       display: none;
     }
   }
@@ -187,6 +198,25 @@
 
 .container-block + .widget {
   margin-top: 20px;
+}
+
+.add-widget-row {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  border-bottom: 1px solid #a5a5a5;
+  cursor: pointer;
+  background: #f1f1f1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: #e1e1e1;
+  }
+}
+
+.add-widget-row:last-child {
+  border-bottom: none;
 }
 
 .pac-container {
