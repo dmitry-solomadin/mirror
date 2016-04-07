@@ -8,7 +8,7 @@ window.Dashboard = ->
   initDragging: ->
     @drake.destroy() if @drake
     elements = []
-    $('.container, .js-side-panel').each -> elements.push @
+    $('.widget-container, .js-side-panel').each -> elements.push @
     @drake = dragula elements,
       copy: (el, source) -> $(el).hasClass('sidepanel-widget')
 
@@ -33,7 +33,7 @@ window.Dashboard = ->
           data:
             widget:
               position: dashboard.widgetPositionInRow(el)
-              parent_id: $(el).parents(".container:first").data('row-id')
+              parent_id: $(el).parents(".widget-container:first").data('row-id')
           success: (data) ->
             $('.containers .last-row').before(data)
             dashboard.initDragging()
@@ -77,7 +77,7 @@ window.Dashboard = ->
       method: "DELETE",
       url: $(btn).attr('href')
       success: ->
-        $(btn).parents(".container:first").remove()
+        $(btn).parents(".widget-container:first").remove()
 
   destroyWidget: (btn, e) ->
     e.preventDefault()
@@ -141,7 +141,7 @@ window.Dashboard = ->
 
   addWidget: (btn, e) ->
     e.preventDefault()
-    row = $(btn).parents('.container:first')
+    row = $(btn).parents('.widget-container:first')
     $.ajax
       method: "POST",
       url: $(btn).attr('href')
