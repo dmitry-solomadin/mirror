@@ -2,9 +2,24 @@ body {
   padding: 0;
   margin: 0;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  height: 245px;
   overflow: hidden;
 }
+
+// QUOTE
+
+.quote-text {
+  font-size: 2em;
+  text-align: center;
+  color: black;
+}
+
+.quote-author {
+  font-size: 1.5em;
+  text-align: center;
+  color: black;
+}
+
+// WEATHER
 
 .fe_container {
   width: 100%;
@@ -15,6 +30,7 @@ body {
   margin: 0 auto;
   height: 245px;
 }
+
 body.hide_daily .fe_container { min-width: 200px;}
 
 .fe_container a { color: #333; }

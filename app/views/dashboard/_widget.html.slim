@@ -3,7 +3,7 @@
   data-href="#{widget.id ? dashboard_widget_path(@dashboard.id, widget.id) : dashboard_widgets_path(@dashboard)}" }
   a.left-handle.js-left-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &larr;
   .widget-content
-    = widget.widget_type
+    = widget.widget_type.capitalize.humanize
   a.btn.btn-default.widget-settings-btn.widget-btn.glyphicon.glyphicon-wrench.js-widget-settings-btn {
     href="#{show_settings_dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" }
   a.btn.btn-danger.widget-delete-btn.widget-btn.glyphicon.glyphicon-remove-circle.js-widget-delete-btn {

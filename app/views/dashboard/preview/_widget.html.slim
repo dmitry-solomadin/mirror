@@ -3,3 +3,5 @@
     - if widget.widget_type == "WEATHER"
       = render 'dashboard/preview/weather_settings', widget: widget
   .widget-content
+    - if widget.widget_type == "QUOTE"
+      = render 'dashboard/preview/quote', widget: widget
