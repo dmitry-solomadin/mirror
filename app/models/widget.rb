@@ -15,7 +15,7 @@ class Widget < ActiveRecord::Base
   store_accessor :settings, :location_full_name, :location_lat, :location_lon, :location_name
 
   def self.by_position
-    order(position: :desc)
+    order(position: :asc)
   end
 
   def self.all_types

@@ -23,16 +23,20 @@ window.Dashboard = ->
             widget:
               widget_type: $(el).data('widget-type'),
               parent_id: row.data('row-id'),
-              position: dashboard.widgetCount(row) + 1
+              position: dashboard.widgetCount(row) + 1 # TODO: Bug - always assigns last position
           success: (data) ->
             $(el).replaceWith(data)
       else
+        newPosition = if $(el).next().hasClass('widget')
+          $(el).next().data('widget-position')
+        else
+          $(el).prev().data('widget-position') + 1
         $.ajax
           method: "PATCH",
-          url: $(el).data('href')
+          url: $(el).data('href') + "/update_position"
           data:
             widget:
-              position: dashboard.widgetPositionInRow(el)
+              position: newPosition
               parent_id: $(el).parents(".widget-container:first").data('row-id')
           success: (data) ->
             $('.containers .last-row').before(data)
@@ -105,9 +109,9 @@ window.Dashboard = ->
         widget:
           widget_type: $(btn).data('widget-type')
           parent_id: rowId,
-          position: dashboard.widgetCount(row) + 1
+          position: dashboard.maxPositionInRow(row) + 1
       success: (data) ->
-        row.prepend(data)
+        $(data).insertBefore(row.find('.js-destroy-row-button'))
 
   destroyWidget: (btn, e) ->
     e.preventDefault()
@@ -175,7 +179,13 @@ window.Dashboard = ->
 
   widgetCount: (row) -> row.find(".widget").size()
 
-  widgetPositionInRow: (widget) -> $(widget).index(".widget")
+  maxPositionInRow: (row) ->
+    maxPosition = -1
+    $(row).find(".widget").each ->
+      maxPosition = $(@).data('widget-position') if maxPosition < $(@).data('widget-position')
+    maxPosition
+
+  widgetPositionInRow: (widget) -> $(widget).data("widget-position")
 
 $(document).on 'ready page:load', ->
   window.dashboard = Dashboard()

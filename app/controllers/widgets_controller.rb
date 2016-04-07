@@ -19,6 +19,16 @@ class WidgetsController < ApplicationController
     head :ok, content_type: 'text/html'
   end
 
+  def update_position
+    widget = Widget.find(params[:id])
+    widget.update(widget_params)
+    row = Widget.find(widget.parent)
+    row.children.where('position >= ? and id != ?', widget_params[:position], params[:id]).each do |child|
+      child.update(position: child.position + 1)
+    end
+    head :ok, content_type: 'text/html'
+  end
+
   def wrap
     widget = Widget.find(params[:id])
     current_parent = widget.parent

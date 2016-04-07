@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       member do
         post 'wrap'
         post 'unwrap'
+        patch 'update_position'
         get 'show_settings'
         patch 'update_settings'
       end

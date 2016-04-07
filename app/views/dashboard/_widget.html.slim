@@ -1,7 +1,11 @@
 - widget_class = local_assigns.fetch(:widget_class) { '' }
-.widget.col-md-12.pl0.pr0 class="#{widget_class}" data-widget-type="#{widget.widget_type}" data-href="#{widget.id ? dashboard_widget_path(@dashboard.id, widget.id) : dashboard_widgets_path(@dashboard)}"
+.widget.col-md-12.pl0.pr0 { class="#{widget_class}" data-widget-type="#{widget.widget_type}" data-widget-position="#{widget.position}"
+  data-href="#{widget.id ? dashboard_widget_path(@dashboard.id, widget.id) : dashboard_widgets_path(@dashboard)}" }
   a.left-handle.js-left-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &larr;
-  .widget-content = widget.widget_type
-  a.btn.btn-default.widget-settings-btn.widget-btn.glyphicon.glyphicon-wrench.js-widget-settings-btn href="#{show_settings_dashboard_widget_path(@dashboard.id, widget.id) if widget.id}"
-  a.btn.btn-danger.widget-delete-btn.widget-btn.glyphicon.glyphicon-remove-circle.js-widget-delete-btn href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}"
+  .widget-content
+    = widget.widget_type
+  a.btn.btn-default.widget-settings-btn.widget-btn.glyphicon.glyphicon-wrench.js-widget-settings-btn {
+    href="#{show_settings_dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" }
+  a.btn.btn-danger.widget-delete-btn.widget-btn.glyphicon.glyphicon-remove-circle.js-widget-delete-btn {
+    href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" }
   a.right-handle.js-right-widget-handle href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}" &rarr;
