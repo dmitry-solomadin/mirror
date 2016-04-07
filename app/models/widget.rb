@@ -10,10 +10,10 @@ class Widget < ActiveRecord::Base
     widget.settings = {} if widget.new_record?
   end
 
-  store_accessor :settings, :location
+  store_accessor :settings, :location_full_name, :location_lat, :location_lon, :location_name
 
   def self.by_position
-    order(position: :asc)
+    order(position: :desc)
   end
 
   def insert_new_row(position)

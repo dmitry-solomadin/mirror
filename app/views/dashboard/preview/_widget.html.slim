@@ -1,2 +1,5 @@
 .widget.col-md-12.pl0.pr0 data-widget-type="#{widget.widget_type}"
+  .widget-settings
+    - if widget.widget_type == "WEATHER"
+      = render 'dashboard/preview/weather_settings', widget: widget
   .widget-content

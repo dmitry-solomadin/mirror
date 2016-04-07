@@ -1,12 +1,15 @@
 h4 Edit #{@widget.widget_type.capitalize} Widget Settings
 
 = form_for(@widget, url: update_settings_dashboard_widget_path(@dashboard, @widget),
-           html: {method: :patch}, remote: true) do |f|
+           html: {method: :patch, class: 'js-widget-settings-form'}, remote: true) do |f|
   .row
     .col-md-8
       .form-group
-        = f.label :location
-        = f.text_field :location, autofocus: true, class: 'form-control'
+        = f.label :location_full_name
+        = f.text_field :location_full_name, autofocus: true, class: 'form-control js-weather-location'
+        = f.hidden_field :location_lat, class: "js-weather-location-lat"
+        = f.hidden_field :location_lon, class: "js-weather-location-lon"
+        = f.hidden_field :location_name, class: "js-weather-location-name"
 
   .actions
     a.btn.btn-default.mr5 data-dismiss="modal" href="#" Cancel

@@ -15,3 +15,4 @@
 //= require bootstrap
 //= require dragula
 //= require dashboard
+//= require widget_settings

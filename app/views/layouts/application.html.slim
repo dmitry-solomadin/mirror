@@ -5,6 +5,7 @@ html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"
     title
       | Project: Mirror
     = stylesheet_link_tag 'application', media: 'all'
+    script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4rNJ_lAJcldW5JWo2uIqosZX65dmtR4&libraries=places"
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body.navbar-fixed.breadcrumbs-fixed class=(yield :body_class)
