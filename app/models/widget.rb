@@ -14,8 +14,8 @@ class Widget < ActiveRecord::Base
 
   store_accessor :settings,
                  :location_full_name, :location_lat, :location_lon, :location_name, # WEATHER
-                 :time_zone, :time_zone_label # TIME AND DATE
-
+                 :time_zone, :time_zone_label, # TIME AND DATE
+                 :countdown_label, :countdown_date_time # COUNTDOWN
   def self.by_position
     order(position: :asc)
   end

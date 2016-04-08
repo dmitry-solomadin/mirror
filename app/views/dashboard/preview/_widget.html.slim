@@ -4,9 +4,13 @@
       = render 'dashboard/preview/weather_settings', widget: widget
     - elsif widget.widget_type == "TIME_AND_DATE"
       = render 'dashboard/preview/time_and_date_settings', widget: widget
+    - elsif widget.widget_type == "COUNTDOWN"
+      = render 'dashboard/preview/countdown_settings', widget: widget
   .widget-content
     - if widget.widget_type == "QUOTE"
       = render 'dashboard/preview/quote', widget: widget
     - elsif widget.widget_type == "TIME_AND_DATE"
       = render 'dashboard/preview/time_and_date', widget: widget
+    - elsif widget.widget_type == "COUNTDOWN"
+      = render 'dashboard/preview/countdown', widget: widget
 

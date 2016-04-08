@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require dragula
+//= require moment
+//= require bootstrap-datetimepicker
 //= require dashboard
 //= require widget_settings
