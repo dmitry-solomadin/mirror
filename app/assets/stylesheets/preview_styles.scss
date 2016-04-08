@@ -19,6 +19,23 @@ body {
   color: black;
 }
 
+// TIME_AND_DATE
+
+.time-and-date-wrapper {
+  text-align: center;
+}
+
+.time-and-date {
+  font-size: 38px;
+  display: inline-block;
+}
+
+.time-and-date-label {
+  font-size: 38px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
 // WEATHER
 
 .fe_container {

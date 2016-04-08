@@ -82,7 +82,9 @@ private
   end
 
   def widget_settings_params
-    params.require(:widget).permit(:settings, :location_full_name, :location_name, :location_lat, :location_lon)
+    params.require(:widget).permit(:settings,
+                                   :location_full_name, :location_name, :location_lat, :location_lon,
+                                   :time_zone, :time_zone_label)
   end
 
   def widget_wrap_params

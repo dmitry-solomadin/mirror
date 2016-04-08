@@ -5,6 +5,5 @@ $(document).on 'ready page:load', ->
     $.ajax
       url: quoteAPIUrl
       success: (data) ->
-        console.log(data)
         $(widget).find('.js-quote-text').html data.contents.quote
         $(widget).find('.js-quote-author').text "-#{data.contents.author}"

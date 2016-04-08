@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require moment
+//= require moment-timezone
 //= require_directory ./widgets

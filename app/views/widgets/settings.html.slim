@@ -2,5 +2,7 @@
 .modal-body
   - if @widget.widget_type == "WEATHER"
     = render 'weather_settings'
+  - elsif @widget.widget_type == "TIME_AND_DATE"
+    = render 'time_and_date_settings'
   - else
     | No settings available.

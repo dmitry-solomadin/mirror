@@ -12,7 +12,9 @@ class Widget < ActiveRecord::Base
     widget.settings = {} if widget.new_record?
   end
 
-  store_accessor :settings, :location_full_name, :location_lat, :location_lon, :location_name
+  store_accessor :settings,
+                 :location_full_name, :location_lat, :location_lon, :location_name, # WEATHER
+                 :time_zone, :time_zone_label # TIME AND DATE
 
   def self.by_position
     order(position: :asc)
