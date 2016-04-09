@@ -13,4 +13,6 @@
       = render 'dashboard/preview/time_and_date', widget: widget
     - elsif widget.widget_type == "COUNTDOWN"
       = render 'dashboard/preview/countdown', widget: widget
+    - elsif widget.widget_type == "CUSTOM_HTML"
+      = render 'dashboard/preview/custom_html', widget: widget
 

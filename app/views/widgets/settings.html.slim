@@ -6,5 +6,7 @@
     = render 'time_and_date_settings'
   - elsif @widget.widget_type == "COUNTDOWN"
     = render 'countdown_settings'
+  - elsif @widget.widget_type == "CUSTOM_HTML"
+    = render 'custom_html_settings'
   - else
     | No settings available.

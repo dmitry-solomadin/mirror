@@ -1,0 +1,17 @@
+h4 Edit #{@widget.widget_type.capitalize} Widget Settings
+
+= form_for(@widget, url: update_settings_dashboard_widget_path(@dashboard, @widget),
+           html: {method: :patch, class: 'js-widget-settings-form'}, remote: true) do |f|
+  .row
+    .col-md-12
+      .form-group
+        = f.label :custom_html
+        = f.text_area :custom_html, rows: 6, class: 'form-control'
+      .form-group
+        = f.label :custom_css
+        = f.text_area :custom_css, rows: 6, class: 'form-control'
+
+  .actions
+    a.btn.btn-default.mr5 data-dismiss="modal" href="#" Cancel
+    = f.submit "Save", class: "btn btn-primary"
+
