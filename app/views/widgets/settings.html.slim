@@ -1,4 +1,4 @@
-.modal-header #{@widget.widget_type.capitalize} widget settings
+.modal-header #{@widget.widget_type.capitalize.humanize} widget settings
 .modal-body
   - if @widget.widget_type == "WEATHER"
     = render 'weather_settings'
@@ -8,5 +8,7 @@
     = render 'countdown_settings'
   - elsif @widget.widget_type == "CUSTOM_HTML"
     = render 'custom_html_settings'
+  - elsif @widget.widget_type == "NY_TIMES"
+    = render 'ny_times_settings'
   - else
     | No settings available.

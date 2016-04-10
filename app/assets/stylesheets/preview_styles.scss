@@ -2,7 +2,10 @@ body {
   padding: 0;
   margin: 0;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  overflow: hidden;
+}
+
+.widget {
+  margin-bottom: 20px;
 }
 
 // QUOTE
@@ -34,6 +37,27 @@ body {
   font-size: 38px;
   margin-right: 10px;
   display: inline-block;
+}
+
+// NY TIMES
+
+.ny-times-wrapper {
+  text-align: center;
+}
+
+.ny-times-news-piece {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.ny-times-news-headline {
+  font-size: 28px;
+  text-align: center;
+}
+
+.ny-times-news-abstract {
+  font-size: 22px;
+  text-align: center;
 }
 
 // COUNTDOWN

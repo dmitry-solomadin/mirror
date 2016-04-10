@@ -1,4 +1,4 @@
-h4 Edit #{@widget.widget_type.capitalize} Widget Settings
+h4 Edit #{@widget.widget_type.capitalize.humanize} Widget Settings
 
 = form_for(@widget, url: update_settings_dashboard_widget_path(@dashboard, @widget),
            html: {method: :patch, class: 'js-widget-settings-form'}, remote: true) do |f|

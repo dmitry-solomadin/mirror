@@ -16,7 +16,9 @@ class Widget < ActiveRecord::Base
                  :location_full_name, :location_lat, :location_lon, :location_name, # WEATHER
                  :time_zone, :time_zone_label, # TIME AND DATE
                  :countdown_label, :countdown_date_time, # COUNTDOWN
-                 :custom_html, :custom_css # CUSTOM HTML
+                 :custom_html, :custom_css, # CUSTOM HTML
+                 :ny_times_category, :ny_times_limit # NY TIMES
+
   def self.by_position
     order(position: :asc)
   end

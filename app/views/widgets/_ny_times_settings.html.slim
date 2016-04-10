@@ -1,0 +1,21 @@
+h4 Edit #{@widget.widget_type.capitalize.humanize} Widget Settings
+
+= form_for(@widget, url: update_settings_dashboard_widget_path(@dashboard, @widget),
+           html: {method: :patch, class: 'js-widget-settings-form'}, remote: true) do |f|
+  - sections = ['arts', 'automobiles', 'blogs', 'books', 'business', 'education' 'fashion & style', 'food', 'health',
+                'home & garden', 'job market', 'movies', 'science', 'sports', 'technology', 'theater',
+                'travel', 'u.s.', 'world', 'your money']
+
+  .row
+    .col-md-8
+      .form-group
+        = f.label :ny_times_category
+        = f.select :ny_times_category, sections, {}, rows: 6, class: 'form-control'
+      .form-group
+        = f.label :ny_times_limit
+        = f.select :ny_times_limit, %w(3 5 10 20), {}, class: 'form-control'
+
+  .actions
+    a.btn.btn-default.mr5 data-dismiss="modal" href="#" Cancel
+    = f.submit "Save", class: "btn btn-primary"
+

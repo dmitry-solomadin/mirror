@@ -86,7 +86,8 @@ private
                                    :location_full_name, :location_name, :location_lat, :location_lon,
                                    :time_zone, :time_zone_label,
                                    :countdown_label, :countdown_date_time,
-                                   :custom_html, :custom_css)
+                                   :custom_html, :custom_css,
+                                   :ny_times_category, :ny_times_limit)
   end
 
   def widget_wrap_params
