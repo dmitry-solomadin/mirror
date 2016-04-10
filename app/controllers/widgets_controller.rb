@@ -40,7 +40,8 @@ class WidgetsController < ApplicationController
     else
       new_row_right.children << widget
     end
-    head :ok, content_type: 'text/html'
+
+    render json: {new_row_left_id: new_row_left.id, new_row_right_id: new_row_right.id}
   end
 
   def unwrap

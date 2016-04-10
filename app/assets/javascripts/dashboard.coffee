@@ -166,11 +166,13 @@ window.Dashboard = ->
           move_direction: direction
           current_position: dashboard.widgetPositionInRow(widget)
       success: (data) ->
+        console.log(data)
+        wrap_row_id = if direction == 'right' then data.new_row_right_id else data.new_row_left_id
         if direction == 'right'
-          widget.before('<div class="container-block col-md-6"></div>')
+          widget.before("<div class='widget-container container-block col-md-6' data-row-id='#{data.new_row_left_id}'></div>")
         else
-          widget.after('<div class="container-block col-md-6"></div>')
-        widget.wrap('<div class="container-block col-md-6"></div>')
+          widget.after("<div class='widget-container container-block col-md-6' data-row-id='#{data.new_row_right_id}'></div>")
+        widget.wrap("<div class='widget-container container-block col-md-6' data-row-id='#{data.wrap_row_id}'></div>")
         dashboard.initDragging()
 
   rowById: (rowId) -> $(".widget-container[data-row-id=#{rowId}]")
