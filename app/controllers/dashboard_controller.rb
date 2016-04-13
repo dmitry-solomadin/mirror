@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
 
   def preview
     @dashboard = Dashboard.find(params[:id])
+    @mode = params[:mode]
     render 'preview', layout: 'preview'
   end
 

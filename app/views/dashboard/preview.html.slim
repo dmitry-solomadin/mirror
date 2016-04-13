@@ -1,3 +1,4 @@
+- content_for :body_class, 'inverted' if @mode == 'inverted'
 .containers
   - @dashboard.widgets.by_position.each do |widget|
     = render 'dashboard/preview/element', widget: widget

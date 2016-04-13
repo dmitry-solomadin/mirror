@@ -8,6 +8,11 @@ body {
   margin-bottom: 20px;
 }
 
+.inverted {
+  color: white !important;
+  background: black !important;
+}
+
 // QUOTE
 
 .quote-text {
@@ -20,6 +25,15 @@ body {
   font-size: 1.5em;
   text-align: center;
   color: black;
+}
+
+.inverted {
+  .quote-text {
+    color: white;
+  }
+  .quote-author {
+    color: white;
+  }
 }
 
 // TIME_AND_DATE
@@ -84,14 +98,26 @@ body {
   font-weight: 300;
   min-width: 500px;
   max-width: 1000px;
-  color: #333;
+  color: black;
   margin: 0 auto;
   height: 245px;
+}
+
+.inverted {
+  .fe_container {
+    color: white;
+  }
 }
 
 body.hide_daily .fe_container { min-width: 200px;}
 
 .fe_container a { color: #333; }
+
+.inverted {
+  .fe_container a {
+    color: white;
+  }
+}
 
 .fe_container .fe_title {
   position: relative;
@@ -202,6 +228,12 @@ body.hide_daily .fe_container .fe_daily { display: none; }
   border-radius: 200px;
 }
 
+.inverted {
+  .fe_temp_bar {
+    background-color: white !important;
+  }
+}
+
 .fe_container .fe_daily .fe_day .fe_high_temp {
   position: absolute;
   width: 100%;
@@ -232,7 +264,6 @@ body.hide_daily .fe_container .fe_daily { display: none; }
   font-style: italic;
   font-weight: bold;
   text-decoration: underline;
-  color: #A00;
 }
 
 .fe_alert a .fe_icon {

@@ -12,7 +12,11 @@ $(document).on 'ready page:load', ->
     lon ||= -71.05888010000001 if !lon
     name ||= "Boston" if !name
 
-    opts.title = '<span class="pre">Weather for </span>' + name
+    opts.title = "<span class='pre'>Weather for </span>#{name}"
+
+    if $('body').hasClass('inverted')
+      opts.color = "#ffffff"
+      opts.text_color = "#ffffff"
 
     if lat == null || lon == null
       opts.title = 'Invalid Location'
@@ -24,8 +28,11 @@ $(document).on 'ready page:load', ->
     embed.elem.prependTo $(widget).find('.widget-content')
     embed.loading(true)
 
-    url = "https://api.forecast.io/forecast/c0e979c69a540f095f458c396be299fc/#{lat},#{lon}?callback=?&units=#{opts.units}"
-    forecast_request = $.getJSON(url, (f) ->
-      embed.build(f)
-      embed.loading(false)
-    )
+    url = "https://api.forecast.io/forecast/c0e979c69a540f095f458c396be299fc/#{lat},#{lon}?units=#{opts.units}"
+
+    $.ajax
+      url: url
+      dataType: "jsonp"
+      success: (data) ->
+        embed.build(data)
+        embed.loading(false)

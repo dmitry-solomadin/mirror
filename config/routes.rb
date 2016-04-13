@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:show] do
     member do
-      get 'preview'
+      get 'preview/:mode', to: 'dashboard#preview', as: 'preview'
       get 'show_add_widget/:row_id', to: 'dashboard#show_add_widget', as: 'show_add_widget'
     end
 
