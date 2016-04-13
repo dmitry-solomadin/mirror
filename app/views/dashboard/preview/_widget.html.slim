@@ -8,6 +8,8 @@
       = render 'dashboard/preview/countdown_settings', widget: widget
     - elsif widget.widget_type == "NY_TIMES"
       = render 'dashboard/preview/ny_times_settings', widget: widget
+    - elsif widget.widget_type == "DIRECTIONS"
+      = render 'dashboard/preview/directions_settings', widget: widget
   .widget-content
     - if widget.widget_type == "QUOTE"
       = render 'dashboard/preview/quote', widget: widget
@@ -19,4 +21,6 @@
       = render 'dashboard/preview/custom_html', widget: widget
     - elsif widget.widget_type == "NY_TIMES"
       = render 'dashboard/preview/ny_times', widget: widget
+    - elsif widget.widget_type == "DIRECTIONS"
+      = render 'dashboard/preview/directions', widget: widget
 

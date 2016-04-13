@@ -10,5 +10,7 @@
     = render 'custom_html_settings'
   - elsif @widget.widget_type == "NY_TIMES"
     = render 'ny_times_settings'
+  - elsif @widget.widget_type == "DIRECTIONS"
+    = render 'directions_settings'
   - else
     | No settings available.

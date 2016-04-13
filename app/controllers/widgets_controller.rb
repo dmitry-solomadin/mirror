@@ -88,7 +88,8 @@ private
                                    :time_zone, :time_zone_label,
                                    :countdown_label, :countdown_date_time,
                                    :custom_html, :custom_css,
-                                   :ny_times_category, :ny_times_limit)
+                                   :ny_times_category, :ny_times_limit,
+                                   :directions_from, :directions_to)
   end
 
   def widget_wrap_params

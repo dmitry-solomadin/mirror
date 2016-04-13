@@ -1,5 +1,5 @@
 class Widget < ActiveRecord::Base
-  WIDGET_TYPES = %w(ROW WEATHER TIME_AND_DATE COUNTDOWN QUOTE CUSTOM_HTML NY_TIMES)
+  WIDGET_TYPES = %w(ROW WEATHER TIME_AND_DATE COUNTDOWN QUOTE CUSTOM_HTML NY_TIMES DIRECTIONS)
 
   belongs_to :dashboard
   belongs_to :parent, foreign_key: :parent_id, class_name: :Widget
@@ -17,7 +17,8 @@ class Widget < ActiveRecord::Base
                  :time_zone, :time_zone_label, # TIME AND DATE
                  :countdown_label, :countdown_date_time, # COUNTDOWN
                  :custom_html, :custom_css, # CUSTOM HTML
-                 :ny_times_category, :ny_times_limit # NY TIMES
+                 :ny_times_category, :ny_times_limit, # NY TIMES
+                 :directions_from, :directions_to # DIRECTIONS
 
   def self.by_position
     order(position: :asc)
