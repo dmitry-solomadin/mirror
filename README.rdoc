@@ -2,9 +2,9 @@
 
 You should have ruby & rails installed
 
-* `bundle install`
-* `rake db:create && rake db:migrate`
-* `rails s`
+* <tt>bundle install</tt>
+* <tt>rake db:create && rake db:migrate</tt>
+* <tt>rails s</tt>
 
 == TODO
 
