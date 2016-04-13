@@ -13,6 +13,8 @@ window.WidgetSettings = ->
           widgetSettings.initWeatherSettings()
         else if $(btn).parents(".widget:first").data('widget-type') == "COUNTDOWN"
           widgetSettings.initCountdownSettings()
+        else if $(btn).parents(".widget:first").data('widget-type') == "DIRECTIONS"
+          widgetSettings.initDirectionsSettings()
         $('.js-widget-settings-form').on 'ajax:success', (e, data, status, xhr) ->
           $('#modal').modal('hide')
         $('#modal').modal()
@@ -25,6 +27,19 @@ window.WidgetSettings = ->
       $('.js-weather-location-name').val(place.address_components[0].long_name)
       $('.js-weather-location-lat').val(place.geometry.location.lat())
       $('.js-weather-location-lon').val(place.geometry.location.lng())
+
+  initDirectionsSettings: ->
+    autocompleteFrom = new google.maps.places.Autocomplete(
+      $('.js-directions-from')[0], { })
+    autocompleteFrom.addListener 'place_changed', ->
+      place = autocompleteFrom.getPlace()
+      $('.js-directions-from-short-name').val(place.name)
+
+    autocompleteTo = new google.maps.places.Autocomplete(
+      $('.js-directions-to')[0], { })
+    autocompleteTo.addListener 'place_changed', ->
+      place = autocompleteTo.getPlace()
+      $('.js-directions-to-short-name').val(place.name)
 
   initCountdownSettings: ->
     $('.js-countdown-date-time').datetimepicker

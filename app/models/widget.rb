@@ -18,7 +18,7 @@ class Widget < ActiveRecord::Base
                  :countdown_label, :countdown_date_time, # COUNTDOWN
                  :custom_html, :custom_css, # CUSTOM HTML
                  :ny_times_category, :ny_times_limit, # NY TIMES
-                 :directions_from, :directions_to # DIRECTIONS
+                 :directions_from, :directions_to, :directions_from_short_name, :directions_to_short_name # DIRECTIONS
 
   def self.by_position
     order(position: :asc)
