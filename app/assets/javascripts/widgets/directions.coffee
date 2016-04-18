@@ -9,7 +9,10 @@ $(document).on 'ready page:load', ->
     directionsRequest =
       origin: from
       destination: to
-      travelMode: google.maps.DirectionsTravelMode.DRIVING
+      travelMode: google.maps.TravelMode.DRIVING
+      drivingOptions:
+        departureTime: new Date()
+        trafficModel: google.maps.TrafficModel.PESSIMISTIC
       unitSystem: google.maps.UnitSystem.METRIC
     directionsService.route(directionsRequest, (response, status) ->
       if status == google.maps.DirectionsStatus.OK
