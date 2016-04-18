@@ -45,11 +45,10 @@ window.Dashboard = ->
   initWidgets: ->
     # init rows
     $(".js-add-row-button").on 'click', (e) -> dashboard.addRow(@, e)
-    $(".js-destroy-row-button").on 'click', (e) -> dashboard.destroyRow(@, e)
+    $(document).on 'click', ".js-destroy-row-button", (e) -> dashboard.destroyRow(@, e)
 
     # init widgets
-    $(document).on 'click', ".js-add-widget-button", (e) ->
-      dashboard.showAddWidget(@, e)
+    $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.showAddWidget(@, e)
     $(document).on 'click', ".js-widget-settings-btn", (e) -> widgetSettings.showSettings(@, e)
     $(document).on 'click', ".js-widget-delete-btn", (e) -> dashboard.destroyWidget(@, e)
     $(document).on 'click', ".js-left-widget-handle, .js-right-widget-handle", (e) -> dashboard.moveWidget(@, e)
