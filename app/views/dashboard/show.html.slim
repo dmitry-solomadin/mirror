@@ -3,8 +3,7 @@
   a.btn.btn-default.side-btn.js-side-btn Widgets
 
 .row.mb20
-  a.btn.btn-success.mr5 target="_blank" href="#{preview_dashboard_path(@dashboard, 'normal')}" Preview
-  a.btn.btn-default target="_blank" href="#{preview_dashboard_path(@dashboard, 'inverted')}" Preview (inverted)
+  a.btn.btn-success target="_blank" href="#{preview_dashboard_path(@dashboard, 'inverted')}" Mirror mode
 
 .containers
   - @dashboard.widgets.by_position.each do |widget|

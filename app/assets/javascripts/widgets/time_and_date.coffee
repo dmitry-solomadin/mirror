@@ -6,7 +6,7 @@ $(document).on 'ready page:load', ->
 
     # TODO: get browser's utc offset
     window.displayDate = ->
-      dateTime = if timeZone then moment().tz(timeZone).format('MMMM Do YYYY, h:mm:ss a') else moment().format('MMMM Do YYYY, h:mm:ss a')
+      dateTime = if timeZone then moment().tz(timeZone).format('MMMM Do YYYY, h:mm a') else moment().format('MMMM Do YYYY, h:mm a')
       $(widget).find('.time-and-date').html(dateTime)
     displayDate()
     setInterval(displayDate, 1000)
