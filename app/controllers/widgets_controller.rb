@@ -30,6 +30,7 @@ class WidgetsController < ApplicationController
   end
 
   def wrap
+    @dashboard = Dashboard.find(params[:dashboard_id])
     widget = Widget.find(params[:id])
     current_parent = widget.parent
     current_parent.children.delete(widget)
@@ -41,7 +42,7 @@ class WidgetsController < ApplicationController
       new_row_right.children << widget
     end
 
-    render json: {new_row_left_id: new_row_left.id, new_row_right_id: new_row_right.id}
+    render partial: 'dashboard/element', locals: { widget: current_parent }
   end
 
   def unwrap

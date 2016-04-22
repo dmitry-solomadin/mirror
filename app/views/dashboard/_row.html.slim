@@ -1,7 +1,7 @@
 - row_class = local_assigns.fetch(:row_class) { '' }
 div class="#{row_class} #{widget.top? ? 'row widget-container container-row' : 'widget-container container-block col-md-6'}" data-row-id="#{widget.id}"
   - widget.children.by_position.each do |child_widget|
-    = render 'element', widget: child_widget
+    = render 'dashboard/element', widget: child_widget
   a.btn.btn-danger.destroy-widget-button.glyphicon.glyphicon-remove-circle.js-destroy-row-button href="#{dashboard_widget_path(@dashboard.id, widget.id) if widget.id}"
   - if widget.top?
     div.row style="clear: both;"
