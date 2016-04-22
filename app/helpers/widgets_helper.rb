@@ -9,4 +9,9 @@ module WidgetsHelper
     end
   end
 
+  def directions_mode_list
+    [['driving', 'google.maps.TravelMode.DRIVING'], ['bicycling', 'google.maps.TravelMode.BICYCLING'],
+     ['transit', 'google.maps.TravelMode.TRANSIT'], ['walking', 'google.maps.TravelMode.WALKING']]
+  end
+
 end

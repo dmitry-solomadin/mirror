@@ -5,6 +5,9 @@ h4 Edit #{@widget.widget_type.capitalize.humanize} Widget Settings
   .row
     .col-md-8
       .form-group
+        = f.label :directions_mode
+        = f.select :directions_mode, directions_mode_list, {}, class: 'form-control'
+      .form-group
         = f.label :directions_from
         = f.text_field :directions_from, rows: 6, class: 'form-control js-directions-from'
       .form-group

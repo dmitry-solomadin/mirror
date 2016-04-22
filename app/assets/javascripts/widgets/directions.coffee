@@ -4,12 +4,13 @@ $(document).on 'ready page:load', ->
 
     from = $(widget).find('.js-directions-from').val()
     to = $(widget).find('.js-directions-to').val()
+    mode = eval($(widget).find('.js-directions-mode').val())
 
     directionsService = new google.maps.DirectionsService()
     directionsRequest =
       origin: from
       destination: to
-      travelMode: google.maps.TravelMode.DRIVING
+      travelMode: mode
       drivingOptions:
         departureTime: new Date()
         trafficModel: google.maps.TrafficModel.PESSIMISTIC
