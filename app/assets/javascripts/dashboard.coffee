@@ -13,6 +13,7 @@ window.Dashboard = ->
       copy: (el, source) -> $(el).hasClass('sidepanel-widget')
 
     @drake.on 'drop', (el, target, source, sibling) ->
+      dashboard.initContainerLeftPadding();
       if $(el).hasClass('sidepanel-widget')
         $(el).removeClass('sidepanel-widget')
         row = $(el).parent()
@@ -28,9 +29,9 @@ window.Dashboard = ->
             $(el).replaceWith(data)
       else
         newPosition = if $(el).next().hasClass('widget')
-          $(el).next().data('widget-position')
+          $(el).next('.position-element:first').data('widget-position')
         else
-          $(el).prev().data('widget-position') + 1
+          $(el).prevAll('.position-element:first').data('widget-position') + 1
         $.ajax
           method: "PATCH",
           url: $(el).data('href') + "/update_position"
@@ -47,9 +48,7 @@ window.Dashboard = ->
     $(".js-add-row-button").on 'click', (e) -> dashboard.addRow(@, e)
     $(document).on 'click', ".js-destroy-row-button", (e) -> dashboard.destroyRow(@, e)
 
-    $(".container-block").filter((index, element) ->
-      (index + 1) % 2 == 0;
-    ).addClass("second")
+    dashboard.initContainerLeftPadding();
 
     # init widgets
     $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.showAddWidget(@, e)
@@ -65,6 +64,11 @@ window.Dashboard = ->
       else
         $('.js-side-panel').css("left": "-300px")
         $('.js-side-btn').css("left": "-31px")
+
+  initContainerLeftPadding: ->
+    $(".container-block").filter((index, element) ->
+      (index + 1) % 2 == 0;
+    ).addClass("second")
 
   addRow: (btn, e) ->
     e.preventDefault()
@@ -114,7 +118,7 @@ window.Dashboard = ->
           parent_id: rowId,
           position: dashboard.maxPositionInRow(row) + 1
       success: (data) ->
-        $(data).insertBefore(row.find('.js-destroy-row-button'))
+        $(data).insertBefore(row.find('> .js-destroy-row-button'))
 
   destroyWidget: (btn, e) ->
     e.preventDefault()
