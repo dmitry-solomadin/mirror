@@ -191,17 +191,10 @@ body {
 .container-block {
   height: 160px;
   padding: 0 !important;
-
-  + .container-block {
-    padding-right: 10px;
-  }
+  margin-bottom: 20px;
 }
 
-.container-block + .widget {
-  margin-top: 20px;
-}
-
-.container-block.col-md-6 + .container-block.col-md-6 {
+.container-block.second {
   padding-left: 20px !important;
 }
 

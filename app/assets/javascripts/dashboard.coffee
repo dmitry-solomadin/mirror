@@ -47,6 +47,10 @@ window.Dashboard = ->
     $(".js-add-row-button").on 'click', (e) -> dashboard.addRow(@, e)
     $(document).on 'click', ".js-destroy-row-button", (e) -> dashboard.destroyRow(@, e)
 
+    $(".container-block").filter((index, element) ->
+      (index + 1) % 2 == 0;
+    ).addClass("second")
+
     # init widgets
     $(document).on 'click', ".js-add-widget-button", (e) -> dashboard.showAddWidget(@, e)
     $(document).on 'click', ".js-widget-settings-btn", (e) -> widgetSettings.showSettings(@, e)
