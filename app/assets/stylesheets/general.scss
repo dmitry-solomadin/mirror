@@ -83,6 +83,7 @@ body {
   vertical-align: middle;
   position: relative;
   cursor: pointer;
+  margin-bottom: 20px;
 
   .widget-content {
     padding: 65px 0;
@@ -130,14 +131,6 @@ body {
 
   .widget-delete-btn {
     right: 70px;
-  }
-
-  + .widget {
-    margin-top: 20px;
-  }
-
-  + .container-block {
-    //margin-top: 20px;
   }
 
   &:hover {
@@ -206,6 +199,10 @@ body {
 
 .container-block + .widget {
   margin-top: 20px;
+}
+
+.container-block.col-md-6 + .container-block.col-md-6 {
+  padding-left: 20px !important;
 }
 
 .add-widget-row {
