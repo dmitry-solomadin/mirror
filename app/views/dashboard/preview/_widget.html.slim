@@ -23,4 +23,11 @@
       = render 'dashboard/preview/ny_times', widget: widget
     - elsif widget.widget_type == "DIRECTIONS"
       = render 'dashboard/preview/directions', widget: widget
+    - elsif widget.widget_type == "RSS"
+      - items = read_rss(widget)
+      .rss-wrapper
+        - items && items.each do |item|
+          .rss-item
+            .rss-item-title = item.title
+            .rss-item-description = strip_tags(item.description)
 

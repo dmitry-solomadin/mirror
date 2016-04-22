@@ -90,7 +90,8 @@ private
                                    :countdown_label, :countdown_date_time,
                                    :custom_html, :custom_css,
                                    :ny_times_category, :ny_times_limit,
-                                   :directions_from, :directions_to, :directions_from_short_name, :directions_to_short_name, :directions_mode)
+                                   :directions_from, :directions_to, :directions_from_short_name, :directions_to_short_name, :directions_mode,
+                                   :rss_url, :rss_limit)
   end
 
   def widget_wrap_params

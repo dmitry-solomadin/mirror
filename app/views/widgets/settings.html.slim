@@ -12,5 +12,7 @@
     = render 'ny_times_settings'
   - elsif @widget.widget_type == "DIRECTIONS"
     = render 'directions_settings'
+  - elsif @widget.widget_type == "RSS"
+    = render 'rss_settings'
   - else
     | No settings available.
