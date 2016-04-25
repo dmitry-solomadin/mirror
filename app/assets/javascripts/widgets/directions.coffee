@@ -6,6 +6,8 @@ $(document).on 'ready page:load', ->
     to = $(widget).find('.js-directions-to').val()
     mode = eval($(widget).find('.js-directions-mode').val())
 
+    return if !from || !to || !mode
+
     directionsService = new google.maps.DirectionsService()
     directionsRequest =
       origin: from

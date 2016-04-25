@@ -1,6 +1,5 @@
 $(document).on 'ready page:load', ->
-  $('.widget[data-widget-type="WEATHER"]').each ->
-    widget = @
+  initWeather = (widget) ->
     opts = {}
 
     lat = +$(widget).find('.js-location-lat').val()
@@ -25,7 +24,7 @@ $(document).on 'ready page:load', ->
       opts.units = 'us'
 
     embed = new ForecastEmbed(opts)
-    embed.elem.prependTo $(widget).find('.widget-content')
+    $(widget).find('.widget-content').html(embed.elem)
     embed.loading(true)
 
     url = "https://api.forecast.io/forecast/c0e979c69a540f095f458c396be299fc/#{lat},#{lon}?units=#{opts.units}"
@@ -36,3 +35,9 @@ $(document).on 'ready page:load', ->
       success: (data) ->
         embed.build(data)
         embed.loading(false)
+
+  $('.widget[data-widget-type="WEATHER"]').each ->
+    widget = @
+    initWeather widget
+    setInterval (-> initWeather widget), widgets.AUTOUPDATE_INTERVAL
+
