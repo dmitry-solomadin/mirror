@@ -1,7 +1,5 @@
 $(document).on 'ready page:load', ->
-  $('.widget[data-widget-type="NY_TIMES"]').each ->
-    widget = @
-
+  init = (widget)->
     limit = $(widget).find('.js-ny-times-limit').val() || 10
     category = $(widget).find('.js-ny-times-category').val() || 'business'
 
@@ -12,7 +10,13 @@ $(document).on 'ready page:load', ->
       url: api_url
       method: 'GET'
       success: (data) ->
+        $(widget).find(".widget-content").html("")
         $(data.results).each ->
           $(widget).find(".widget-content").append(
             "<div class='ny-times-news-piece'><div class='ny-times-news-headline'>#{@.title}</div>" +
-            "<div class='ny-times-news-abstract'>#{@.abstract}</div></div>")
+              "<div class='ny-times-news-abstract'>#{@.abstract}</div></div>")
+
+  $('.widget[data-widget-type="NY_TIMES"]').each ->
+    widget = @
+    init widget
+    setInterval (-> init widget), widgets.AUTOUPDATE_INTERVAL

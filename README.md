@@ -8,4 +8,4 @@ You should have ruby & rails installed
 
 # TODO
 
-* Auto-update for ny-times, directions and rss widgets.
+* Auto-update for rss widget.
