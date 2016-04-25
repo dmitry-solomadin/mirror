@@ -1,13 +1,13 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-server "104.236.68.5", user: "root", roles: %w{web app db}
+server "107.170.38.41", user: "root", roles: %w{web app db}
 
 set :ssh_options, {:forward_agent => true}
 
 set :application, 'mirror'
 set :deploy_user, 'root'
-set :repo_url, 'git@github.com:znvPredatoR/mirror.git'
+set :repo_url, 'git@bitbucket.org:reflect_mirror/reflect.git'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
