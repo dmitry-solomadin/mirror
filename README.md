@@ -1,29 +1,11 @@
-# README #
+# INSTALL
 
-This README would normally document whatever steps are necessary to get your application up and running.
+You should have ruby & rails installed
 
-### What is this repository for? ###
+* <tt>bundle install</tt>
+* <tt>rake db:create && rake db:migrate</tt>
+* <tt>rails s</tt>
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+# TODO
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Auto-update for ny-times, weather and quote widgets.
