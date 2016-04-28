@@ -13,6 +13,13 @@ body {
   background: black !important;
 }
 
+@media (min-width: 600px) {
+  .col-md-6 {
+    width: 50% !important;
+    float: left;
+  }
+}
+
 // QUOTE
 
 .quote-text {
