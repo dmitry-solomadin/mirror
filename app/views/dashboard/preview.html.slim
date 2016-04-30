@@ -1,4 +1,6 @@
 - content_for :body_class, 'inverted' if @mode == 'inverted'
+input.js-dashboard-url type="hidden" value="#{dashboard_path(@dashboard)}"
+input.js-dashboard-version type="hidden" value="#{@dashboard.version}"
 .containers
   - @dashboard.widgets.by_position.each do |widget|
     = render 'dashboard/preview/element', widget: widget

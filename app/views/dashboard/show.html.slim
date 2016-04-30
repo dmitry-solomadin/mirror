@@ -3,10 +3,13 @@
   a.btn.btn-default.side-btn.js-side-btn Widgets
 
 .row.mb20
-  a.btn.btn-success target="_blank" href="#{preview_dashboard_path(@dashboard, 'inverted')}" Mirror mode
+  a.btn.btn-success.mr5 target="_blank" href="#{preview_dashboard_path(@dashboard, 'inverted')}" Mirror mode
+  = link_to "Save", increase_version_dashboard_path(@dashboard), method: :put, class: 'btn btn-primary mr5'
+  span.note * Note: Save will trigger an update on a device
 
 .containers
   - @dashboard.widgets.by_position.each do |widget|
     = render 'element', widget: widget
   .row.last-row
     a.btn.btn-default.js-add-row-button href="#{dashboard_widgets_path(@dashboard)}" Add Row
+
